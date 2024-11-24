@@ -2,3 +2,4 @@ venv
 opdracht.pdf
 db.sqlite3
 *.csv
+.env
