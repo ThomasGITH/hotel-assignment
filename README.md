@@ -113,3 +113,11 @@ The server then runs on:
 ```
 http://localhost:8000
 ```
+
+## Unit Tests
+The project also contains unit tests for the backend API endpoints. To run the tests, use the following command:
+```
+python manage.py test
+```
+
+**Note that if you use docker, you might have to run the tests in the TTY of the docker container in order for them to work.**
