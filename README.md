@@ -37,6 +37,11 @@ Then run it with:
 docker run --name hotel-app -p 8000:8000 hotel-app
 ```
 
+The server then runs on:
+```
+http://localhost:8000
+```
+
 The project also has functionality set up to use the Django admin dashboard to view the database tables. The admin user still needs to be created in your local database however. To do this, first enter the containers TTY with:
 ```
 docker exec -it hotel-app /bin/sh
