@@ -1,6 +1,8 @@
 # Hotel Manager Assignment
 This small project was made as an assignment for Maykin Media. It contains a small Django project that fetches CSV data over HTTP, transforms it into database data, and then uses it to provide a front-end for hotel managers. This README briefly describes some details of this project and how to get it up and running.
 
+Most of this README is about how to setup the project, but I also deployed a live-running version on [this page](http://84.105.39.248:8000) in case it doesn't work.
+
 ## Design Choices
 ### Database
 As database, SQLite was used. This is because for a small assignment like this, it is a quicker/easier setup than a 'dedicated' RDBMS such as MySQL. In a real project, I would use MySQL or a similar database system since it would likely have performance benefits.
@@ -12,6 +14,7 @@ I chose to implement the front-end using native Javascript alongside Django's bu
 On the front-end, I chose to use the CDN of TailwindCSS for the CSS styling. While I could have used native CSS too, it's very little hassle to setup Tailwind using the CDN script-url, and it made styling the front-end feel much more comfortable for me since I'm used to working with it.
 
 ## Setting up the project
+The project can be set up either using Docker or by manually inputting commands. This section contains brief walkthrough explanations for both.
 
 ### With Docker
 To easily set up the project locally, the project has a Dockerfile that handles nearly everything automatically. To use it, perform the following steps:
@@ -57,7 +60,7 @@ and then follow the steps. The admin dashboard will then be available on:
 http://localhost:8000/admin
 ```
 
-### Manually
+### Manual setup
 
 After cloning the project and navigating to the folder, create an isolated environment for the projects' dependencies using Venv:
 ```
