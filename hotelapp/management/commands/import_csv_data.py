@@ -4,9 +4,17 @@ import requests
 from django.core.management.base import BaseCommand
 from hotelapp.models import City, Hotel
 
+"""
+This file defines a Django-command that will import city and 
+hotel CSV data (in an expected format) from two URL's saved 
+in environment variables.
+"""
+
+# CSV data URLs
 CITY_CSV_URL = os.getenv("CITY_CSV_URL")
 HOTEL_CSV_URL = os.getenv("HOTEL_CSV_URL")
 
+# HTTP Authentication info
 AUTH_INFO = (os.getenv("AUTH_USERNAME"),
              os.getenv("AUTH_PASSWORD"))
 
@@ -31,6 +39,9 @@ class Command(BaseCommand):
             City.objects.update_or_create(
                 code=code, defaults={"name": name})
 
+        # Note that this line probably won't work when 
+        # performed by the cronjob. In a real project I 
+        # would use logging for this.
         self.stdout.write(self.style.SUCCESS("Done importing cities"))
 
     def import_hotels(self):
@@ -53,4 +64,7 @@ class Command(BaseCommand):
             Hotel.objects.update_or_create(
                 local_code=local_code, city=city, defaults={"name": name})
 
+        # Note that this line probably won't work when z
+        # performed by the cronjob. In a real project I 
+        # would use logging for this.
         self.stdout.write(self.style.SUCCESS("Done importing hotels"))
