@@ -2,12 +2,15 @@ from django.db import models
 
 
 class City(models.Model):
+    """
+    City model. Contains a 'name' column as well as a 
+    three-character 'code' column as a short form of 
+    the name of the city.
+    """
+
     code = models.CharField(max_length=3, primary_key=True)
     name = models.CharField(max_length=100)
 
-
-# As long as a city exists, hotels should be displayed for it.
-# Therefore the 'PROTECT' constraint makes the most sense here.
 class Hotel(models.Model):
     """
     Hotel model. Contains a local_code, name of the hotel and
@@ -27,7 +30,20 @@ class Hotel(models.Model):
 
     local_code = models.CharField(max_length=2)
     name = models.CharField(max_length=100)
+
+    # Whether this should be 'PROTECT' or 'CASCADE' is debatable. I
+    # think that 'PROTECT' makes more sense since, as long as hotels
+    # exist, the city they're in ought to exist too.
     city = models.ForeignKey(City, on_delete=models.PROTECT)
+
+    def global_code(self):
+        """
+        Returns the 'global code' i.e. the local code but with the
+        city code behind it. This is the same formatting as in the
+        CSV data.
+        """
+
+        return f"{self.city.code}{self.local_code}"
 
     class Meta:
         """
@@ -35,6 +51,7 @@ class Hotel(models.Model):
         This enforces that in a city, there can be only one hotel with
         a specific code/number.
         """
+
         constraints = [
             models.UniqueConstraint(fields=['city', 'local_code'],
             name='unique_city_local_code')
